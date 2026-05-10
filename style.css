@@ -85,7 +85,7 @@ form {
 
   width: 100%;
 
-  /* 🔥 نقصنا الطول */
+ 
   max-width: 760px;
 
   box-shadow: 0 6px 28px rgba(0,0,0,0.12);
@@ -132,7 +132,7 @@ form::before {
 
 form::after {
 
-  content: "Veuillez remplir tous les champs avec vos coordonnées.";
+  content: "Please fill in all the fields with your details.";
 
   grid-column: 1 / -1;
 
