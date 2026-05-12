@@ -8,15 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       SOLARGROUP — Design Élégant Beige & Or
-    ============================================================ */
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      min-height: 100vh;
-    }
+    html, body { min-height: 100vh; }
 
     body {
       font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
@@ -28,10 +21,6 @@
       position: relative;
     }
 
-    /* ════════════════════════
-       TOP BAR — full page width
-       Logo LEFT · Name RIGHT
-    ════════════════════════ */
     .top-bar {
       position: sticky;
       top: 0;
@@ -58,11 +47,12 @@
       font-size: 32px;
       box-shadow: 0 4px 18px rgba(0,0,0,0.10);
     }
-.logo-box img {
-  width: 90%;
-  height: 80%;
-  object-fit: contain;
-}
+    .logo-box img {
+      width: 90%;
+      height: 80%;
+      object-fit: contain;
+    }
+
     .company-name {
       background: #ffffff;
       padding: 16px 28px;
@@ -74,9 +64,6 @@
       box-shadow: 0 4px 18px rgba(0,0,0,0.10);
     }
 
-    /* ════════════════════════
-       INTRO LINES
-    ════════════════════════ */
     .intro-line {
       display: block;
       width: 80px;
@@ -94,14 +81,78 @@
       margin-bottom: 2rem;
     }
 
-    /* ════════════════════════
-       MASQUER ÉLÉMENTS INUTILES
-    ════════════════════════ */
     input[type="hidden"], br { display: none; }
 
-    /* ════════════════════════
-       CARTE FORMULAIRE
-    ════════════════════════ */
+    /* ════════════ DUPLICATE ALERT ════════════ */
+    .duplicate-alert {
+      display: none;
+      width: 100%;
+      max-width: 580px;
+      margin-bottom: 1.2rem;
+      background: #FFF8EC;
+      border: 1.5px solid #C9A96E;
+      border-radius: 12px;
+      padding: 16px 20px;
+      animation: slideDown 0.3s ease;
+    }
+
+    .duplicate-alert.visible {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      background: #C9A96E;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .alert-icon svg { width: 20px; height: 20px; }
+
+    .alert-body { flex: 1; }
+
+    .alert-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1B2A3B;
+      margin-bottom: 4px;
+    }
+
+    .alert-desc {
+      font-size: 13px;
+      color: #6B6456;
+      line-height: 1.6;
+    }
+
+    .alert-fields {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .alert-tag {
+      background: #F5F0EA;
+      border: 1px solid #E2D8CC;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 12px;
+      color: #1B2A3B;
+      font-weight: 500;
+    }
+
+    /* ════════════ FORM ════════════ */
     form {
       background: #ffffff;
       border-radius: 16px;
@@ -115,11 +166,6 @@
       font-size: 0;
     }
 
-    form::before, form::after { display: none; }
-
-    /* ════════════════════════
-       LABELS
-    ════════════════════════ */
     form > label {
       display: block;
       font-size: 12.5px;
@@ -140,9 +186,6 @@
     form > label:nth-of-type(7) { grid-column: 1; padding-left: 0;    padding-right: 10px; }
     form > label:nth-of-type(8) { grid-column: 2; padding-left: 10px; padding-right: 0; }
 
-    /* ════════════════════════
-       INPUTS
-    ════════════════════════ */
     form > input[type="text"],
     form > input[type="email"] {
       display: block;
@@ -165,41 +208,40 @@
       box-shadow: 0 0 0 3px rgba(201,169,110,.12);
     }
 
+    /* Champ en erreur doublon */
+    form > input.duplicate-field {
+      border-color: #C9A96E !important;
+      background-color: #FFFAF3 !important;
+      box-shadow: 0 0 0 3px rgba(201,169,110,.18) !important;
+    }
+
     form > input::placeholder { color: #BDB0A0; font-size: 13px; }
 
-    /* Icônes dorées */
     input#first_name {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
     input#last_name {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
     input#phone {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
     input#email {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='M2 8l10 6 10-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
     input#company {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Cpath d='M3 9h18M9 21V9'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
     input#city {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z'/%3E%3Ccircle cx='12' cy='9' r='2.5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 11px center;
+      background-repeat: no-repeat; background-position: 11px center;
     }
 
-    /* Positions dans la grille */
     input#first_name { grid-column: 1; margin: 0 10px 0 0;   width: calc(100% - 10px); }
     input#last_name  { grid-column: 2; margin: 0 0   0 10px; width: calc(100% - 10px); }
     input#phone      { grid-column: 1; margin: 0 10px 0 0;   width: calc(100% - 10px); }
@@ -207,9 +249,6 @@
     input#company    { grid-column: 1; margin: 0 10px 0 0;   width: calc(100% - 10px); }
     input#city       { grid-column: 2; margin: 0 0   0 10px; width: calc(100% - 10px); }
 
-    /* ════════════════════════
-       SELECTS
-    ════════════════════════ */
     form > select {
       display: block;
       font-size: 13.5px;
@@ -233,11 +272,8 @@
       box-shadow: 0 0 0 3px rgba(201,169,110,.12);
     }
 
-    /* Icône monde pour Country */
     form > select#country_code {
-      grid-column: 1;
-      margin: 0 10px 0 0;
-      width: calc(100% - 10px);
+      grid-column: 1; margin: 0 10px 0 0; width: calc(100% - 10px);
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M2 12h20M12 3c-3 4-3 14 0 18M12 3c3 4 3 14 0 18'/%3E%3C/svg%3E"),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -245,11 +281,8 @@
       background-position: 11px center, right 12px center;
     }
 
-    /* Icône éclair pour Service */
     form > select#00NNS00003EWjLN {
-      grid-column: 2;
-      margin: 0 0 0 10px;
-      width: calc(100% - 10px);
+      grid-column: 2; margin: 0 0 0 10px; width: calc(100% - 10px);
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E"),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C9A96E' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -257,9 +290,6 @@
       background-position: 11px center, right 12px center;
     }
 
-    /* ════════════════════════
-       BOUTON SUBMIT
-    ════════════════════════ */
     form > input[type="submit"] {
       all: unset;
       grid-column: 1 / -1;
@@ -283,9 +313,7 @@
     form > input[type="submit"]:hover  { background: #243547; }
     form > input[type="submit"]:active { background: #111D28; }
 
-    /* ════════════════════════
-       RESPONSIVE MOBILE
-    ════════════════════════ */
+    /* ════════════ RESPONSIVE ════════════ */
     @media (max-width: 540px) {
       .top-bar { padding: 14px 20px; }
       .logo-box { width: 56px; height: 56px; font-size: 26px; }
@@ -306,27 +334,23 @@
       input#first_name, input#last_name,
       input#phone,      input#email,
       input#company,    input#city {
-        grid-column: 1;
-        margin: 0;
-        width: 100%;
+        grid-column: 1; margin: 0; width: 100%;
       }
 
       form > select#country_code,
       form > select#00NNS00003EWjLN {
-        grid-column: 1;
-        margin: 0;
-        width: 100%;
+        grid-column: 1; margin: 0; width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ TOP BAR : Logo gauche · Nom droite ══ -->
+  <!-- ══ TOP BAR ══ -->
   <div class="top-bar">
-   <div class="logo-box">
-  <img src="https://img.freepik.com/vecteurs-premium/logo-pour-energie-fond-blanc_466938-1664.jpg?semt=ais_hybrid&w=740&q=80" alt="Logo">
-</div>
+    <div class="logo-box">
+      <img src="https://img.freepik.com/vecteurs-premium/logo-pour-energie-fond-blanc_466938-1664.jpg?semt=ais_hybrid&w=740&q=80" alt="Logo">
+    </div>
     <div class="company-name">SOLARGROUP</div>
   </div>
 
@@ -334,10 +358,25 @@
   <span class="intro-line"></span>
   <p class="intro-text">We are here to listen. Fill in the form below and we will get back to you as soon as possible.</p>
 
-  <!-- ══ FORMULAIRE SALESFORCE ══ -->
-  <form action="https://webto.salesforce.com/servlet/servlet.WebToLead" method="POST">
+  <!-- ══ DUPLICATE ALERT ══ -->
+  <div class="duplicate-alert" id="duplicateAlert">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <div class="alert-body">
+      <div class="alert-title">This information already exists in our system</div>
+      <div class="alert-desc">One or more fields you entered match an existing record. Please verify your information before submitting.</div>
+      <div class="alert-fields" id="alertFields"></div>
+    </div>
+  </div>
 
-    
+  <!-- ══ FORMULAIRE SALESFORCE ══ -->
+  <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead" method="POST">
+
     <input type="hidden" name="oid" value="00DNS00000rvEKf">
     <input type="hidden" name="retURL" value="https://safaa447.github.io/solar-form/merci.html">
 
@@ -350,8 +389,8 @@
     <label for="phone">Phone</label>
     <label for="email">Email</label>
 
-    <input id="phone" maxlength="40" name="phone" size="20" type="text" placeholder="+1 555 000 0000" />
-    <input id="email" maxlength="80" name="email" size="20" type="text" placeholder="john@email.com" />
+    <input id="phone"   maxlength="40" name="phone" size="20" type="text" placeholder="+1 555 000 0000" />
+    <input id="email"   maxlength="80" name="email" size="20" type="text" placeholder="john@email.com" />
 
     <label for="company">Company</label>
     <label for="city">City</label>
@@ -364,234 +403,121 @@
 
     <select id="country_code" name="country_code">
       <option value="">-- Select --</option>
-      <option value="AF">Afghanistan</option>
-      <option value="AX">Åland Islands</option>
-      <option value="AL">Albania</option>
-      <option value="DZ">Algeria</option>
-      <option value="AD">Andorra</option>
-      <option value="AO">Angola</option>
-      <option value="AI">Anguilla</option>
-      <option value="AQ">Antarctica</option>
-      <option value="AG">Antigua and Barbuda</option>
-      <option value="AR">Argentina</option>
-      <option value="AM">Armenia</option>
-      <option value="AW">Aruba</option>
-      <option value="AU">Australia</option>
-      <option value="AT">Austria</option>
-      <option value="AZ">Azerbaijan</option>
-      <option value="BS">Bahamas</option>
-      <option value="BH">Bahrain</option>
-      <option value="BD">Bangladesh</option>
-      <option value="BB">Barbados</option>
-      <option value="BY">Belarus</option>
-      <option value="BE">Belgium</option>
-      <option value="BZ">Belize</option>
-      <option value="BJ">Benin</option>
-      <option value="BM">Bermuda</option>
-      <option value="BT">Bhutan</option>
-      <option value="BO">Bolivia</option>
-      <option value="BQ">Bonaire</option>
-      <option value="BA">Bosnia and Herzegovina</option>
-      <option value="BW">Botswana</option>
-      <option value="BR">Brazil</option>
-      <option value="IO">British Indian Ocean Territory</option>
-      <option value="BN">Brunei</option>
-      <option value="BG">Bulgaria</option>
-      <option value="BF">Burkina Faso</option>
-      <option value="BI">Burundi</option>
-      <option value="KH">Cambodia</option>
-      <option value="CM">Cameroon</option>
-      <option value="CA">Canada</option>
-      <option value="CV">Cape Verde</option>
-      <option value="KY">Cayman Islands</option>
-      <option value="CF">Central African Republic</option>
-      <option value="TD">Chad</option>
-      <option value="CL">Chile</option>
-      <option value="CN">China</option>
-      <option value="CO">Colombia</option>
-      <option value="KM">Comoros</option>
-      <option value="CG">Congo</option>
-      <option value="CD">Congo (DRC)</option>
-      <option value="CR">Costa Rica</option>
-      <option value="CI">Côte d'Ivoire</option>
-      <option value="HR">Croatia</option>
-      <option value="CW">Curaçao</option>
-      <option value="CY">Cyprus</option>
-      <option value="CZ">Czech Republic</option>
-      <option value="DK">Denmark</option>
-      <option value="DJ">Djibouti</option>
-      <option value="DM">Dominica</option>
-      <option value="DO">Dominican Republic</option>
-      <option value="EC">Ecuador</option>
-      <option value="EG">Egypt</option>
-      <option value="SV">El Salvador</option>
-      <option value="GQ">Equatorial Guinea</option>
-      <option value="ER">Eritrea</option>
-      <option value="EE">Estonia</option>
-      <option value="SZ">Eswatini</option>
-      <option value="ET">Ethiopia</option>
-      <option value="FK">Falkland Islands</option>
-      <option value="FO">Faroe Islands</option>
-      <option value="FJ">Fiji</option>
-      <option value="FI">Finland</option>
-      <option value="FR">France</option>
-      <option value="GF">French Guiana</option>
-      <option value="PF">French Polynesia</option>
-      <option value="GA">Gabon</option>
-      <option value="GM">Gambia</option>
-      <option value="GE">Georgia</option>
-      <option value="DE">Germany</option>
-      <option value="GH">Ghana</option>
-      <option value="GI">Gibraltar</option>
-      <option value="GR">Greece</option>
-      <option value="GL">Greenland</option>
-      <option value="GD">Grenada</option>
-      <option value="GP">Guadeloupe</option>
-      <option value="GT">Guatemala</option>
-      <option value="GG">Guernsey</option>
-      <option value="GN">Guinea</option>
-      <option value="GW">Guinea-Bissau</option>
-      <option value="GY">Guyana</option>
-      <option value="HT">Haiti</option>
-      <option value="VA">Holy See</option>
-      <option value="HN">Honduras</option>
-      <option value="HU">Hungary</option>
-      <option value="IS">Iceland</option>
-      <option value="IN">India</option>
-      <option value="ID">Indonesia</option>
-      <option value="IQ">Iraq</option>
-      <option value="IE">Ireland</option>
-      <option value="IM">Isle of Man</option>
-      <option value="IL">Israel</option>
-      <option value="IT">Italy</option>
-      <option value="JM">Jamaica</option>
-      <option value="JP">Japan</option>
-      <option value="JE">Jersey</option>
-      <option value="JO">Jordan</option>
-      <option value="KZ">Kazakhstan</option>
-      <option value="KE">Kenya</option>
-      <option value="KI">Kiribati</option>
-      <option value="KR">Korea (South)</option>
-      <option value="XK">Kosovo</option>
-      <option value="KW">Kuwait</option>
-      <option value="KG">Kyrgyzstan</option>
-      <option value="LA">Laos</option>
-      <option value="LV">Latvia</option>
-      <option value="LB">Lebanon</option>
-      <option value="LS">Lesotho</option>
-      <option value="LR">Liberia</option>
-      <option value="LY">Libya</option>
-      <option value="LI">Liechtenstein</option>
-      <option value="LT">Lithuania</option>
-      <option value="LU">Luxembourg</option>
-      <option value="MO">Macao</option>
-      <option value="MG">Madagascar</option>
-      <option value="MW">Malawi</option>
-      <option value="MY">Malaysia</option>
-      <option value="MV">Maldives</option>
-      <option value="ML">Mali</option>
-      <option value="MT">Malta</option>
-      <option value="MQ">Martinique</option>
-      <option value="MR">Mauritania</option>
-      <option value="MU">Mauritius</option>
-      <option value="YT">Mayotte</option>
-      <option value="MX">Mexico</option>
-      <option value="MD">Moldova</option>
-      <option value="MC">Monaco</option>
-      <option value="MN">Mongolia</option>
-      <option value="ME">Montenegro</option>
-      <option value="MS">Montserrat</option>
-      <option value="MA">Morocco</option>
-      <option value="MZ">Mozambique</option>
-      <option value="MM">Myanmar</option>
-      <option value="NA">Namibia</option>
-      <option value="NR">Nauru</option>
-      <option value="NP">Nepal</option>
-      <option value="NL">Netherlands</option>
-      <option value="NC">New Caledonia</option>
-      <option value="NZ">New Zealand</option>
-      <option value="NI">Nicaragua</option>
-      <option value="NE">Niger</option>
-      <option value="NG">Nigeria</option>
-      <option value="NU">Niue</option>
-      <option value="NF">Norfolk Island</option>
-      <option value="MK">North Macedonia</option>
-      <option value="NO">Norway</option>
-      <option value="OM">Oman</option>
-      <option value="PK">Pakistan</option>
-      <option value="PS">Palestine</option>
-      <option value="PA">Panama</option>
-      <option value="PG">Papua New Guinea</option>
-      <option value="PY">Paraguay</option>
-      <option value="PE">Peru</option>
-      <option value="PH">Philippines</option>
-      <option value="PN">Pitcairn</option>
-      <option value="PL">Poland</option>
-      <option value="PT">Portugal</option>
-      <option value="QA">Qatar</option>
-      <option value="RE">Réunion</option>
-      <option value="RO">Romania</option>
-      <option value="RU">Russia</option>
-      <option value="RW">Rwanda</option>
-      <option value="BL">Saint Barthélemy</option>
-      <option value="SH">Saint Helena</option>
-      <option value="KN">Saint Kitts and Nevis</option>
-      <option value="LC">Saint Lucia</option>
-      <option value="MF">Saint Martin</option>
+      <option value="AF">Afghanistan</option><option value="AX">Åland Islands</option>
+      <option value="AL">Albania</option><option value="DZ">Algeria</option>
+      <option value="AD">Andorra</option><option value="AO">Angola</option>
+      <option value="AI">Anguilla</option><option value="AQ">Antarctica</option>
+      <option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option>
+      <option value="AM">Armenia</option><option value="AW">Aruba</option>
+      <option value="AU">Australia</option><option value="AT">Austria</option>
+      <option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option>
+      <option value="BH">Bahrain</option><option value="BD">Bangladesh</option>
+      <option value="BB">Barbados</option><option value="BY">Belarus</option>
+      <option value="BE">Belgium</option><option value="BZ">Belize</option>
+      <option value="BJ">Benin</option><option value="BM">Bermuda</option>
+      <option value="BT">Bhutan</option><option value="BO">Bolivia</option>
+      <option value="BQ">Bonaire</option><option value="BA">Bosnia and Herzegovina</option>
+      <option value="BW">Botswana</option><option value="BR">Brazil</option>
+      <option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei</option>
+      <option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option>
+      <option value="BI">Burundi</option><option value="KH">Cambodia</option>
+      <option value="CM">Cameroon</option><option value="CA">Canada</option>
+      <option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option>
+      <option value="CF">Central African Republic</option><option value="TD">Chad</option>
+      <option value="CL">Chile</option><option value="CN">China</option>
+      <option value="CO">Colombia</option><option value="KM">Comoros</option>
+      <option value="CG">Congo</option><option value="CD">Congo (DRC)</option>
+      <option value="CR">Costa Rica</option><option value="CI">Côte d'Ivoire</option>
+      <option value="HR">Croatia</option><option value="CW">Curaçao</option>
+      <option value="CY">Cyprus</option><option value="CZ">Czech Republic</option>
+      <option value="DK">Denmark</option><option value="DJ">Djibouti</option>
+      <option value="DM">Dominica</option><option value="DO">Dominican Republic</option>
+      <option value="EC">Ecuador</option><option value="EG">Egypt</option>
+      <option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option>
+      <option value="ER">Eritrea</option><option value="EE">Estonia</option>
+      <option value="SZ">Eswatini</option><option value="ET">Ethiopia</option>
+      <option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option>
+      <option value="FJ">Fiji</option><option value="FI">Finland</option>
+      <option value="FR">France</option><option value="GF">French Guiana</option>
+      <option value="PF">French Polynesia</option><option value="GA">Gabon</option>
+      <option value="GM">Gambia</option><option value="GE">Georgia</option>
+      <option value="DE">Germany</option><option value="GH">Ghana</option>
+      <option value="GI">Gibraltar</option><option value="GR">Greece</option>
+      <option value="GL">Greenland</option><option value="GD">Grenada</option>
+      <option value="GP">Guadeloupe</option><option value="GT">Guatemala</option>
+      <option value="GG">Guernsey</option><option value="GN">Guinea</option>
+      <option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option>
+      <option value="HT">Haiti</option><option value="VA">Holy See</option>
+      <option value="HN">Honduras</option><option value="HU">Hungary</option>
+      <option value="IS">Iceland</option><option value="IN">India</option>
+      <option value="ID">Indonesia</option><option value="IQ">Iraq</option>
+      <option value="IE">Ireland</option><option value="IM">Isle of Man</option>
+      <option value="IL">Israel</option><option value="IT">Italy</option>
+      <option value="JM">Jamaica</option><option value="JP">Japan</option>
+      <option value="JE">Jersey</option><option value="JO">Jordan</option>
+      <option value="KZ">Kazakhstan</option><option value="KE">Kenya</option>
+      <option value="KI">Kiribati</option><option value="KR">Korea (South)</option>
+      <option value="XK">Kosovo</option><option value="KW">Kuwait</option>
+      <option value="KG">Kyrgyzstan</option><option value="LA">Laos</option>
+      <option value="LV">Latvia</option><option value="LB">Lebanon</option>
+      <option value="LS">Lesotho</option><option value="LR">Liberia</option>
+      <option value="LY">Libya</option><option value="LI">Liechtenstein</option>
+      <option value="LT">Lithuania</option><option value="LU">Luxembourg</option>
+      <option value="MO">Macao</option><option value="MG">Madagascar</option>
+      <option value="MW">Malawi</option><option value="MY">Malaysia</option>
+      <option value="MV">Maldives</option><option value="ML">Mali</option>
+      <option value="MT">Malta</option><option value="MQ">Martinique</option>
+      <option value="MR">Mauritania</option><option value="MU">Mauritius</option>
+      <option value="YT">Mayotte</option><option value="MX">Mexico</option>
+      <option value="MD">Moldova</option><option value="MC">Monaco</option>
+      <option value="MN">Mongolia</option><option value="ME">Montenegro</option>
+      <option value="MS">Montserrat</option><option value="MA">Morocco</option>
+      <option value="MZ">Mozambique</option><option value="MM">Myanmar</option>
+      <option value="NA">Namibia</option><option value="NR">Nauru</option>
+      <option value="NP">Nepal</option><option value="NL">Netherlands</option>
+      <option value="NC">New Caledonia</option><option value="NZ">New Zealand</option>
+      <option value="NI">Nicaragua</option><option value="NE">Niger</option>
+      <option value="NG">Nigeria</option><option value="NU">Niue</option>
+      <option value="NF">Norfolk Island</option><option value="MK">North Macedonia</option>
+      <option value="NO">Norway</option><option value="OM">Oman</option>
+      <option value="PK">Pakistan</option><option value="PS">Palestine</option>
+      <option value="PA">Panama</option><option value="PG">Papua New Guinea</option>
+      <option value="PY">Paraguay</option><option value="PE">Peru</option>
+      <option value="PH">Philippines</option><option value="PN">Pitcairn</option>
+      <option value="PL">Poland</option><option value="PT">Portugal</option>
+      <option value="QA">Qatar</option><option value="RE">Réunion</option>
+      <option value="RO">Romania</option><option value="RU">Russia</option>
+      <option value="RW">Rwanda</option><option value="BL">Saint Barthélemy</option>
+      <option value="SH">Saint Helena</option><option value="KN">Saint Kitts and Nevis</option>
+      <option value="LC">Saint Lucia</option><option value="MF">Saint Martin</option>
       <option value="PM">Saint Pierre and Miquelon</option>
       <option value="VC">Saint Vincent and the Grenadines</option>
-      <option value="WS">Samoa</option>
-      <option value="SM">San Marino</option>
-      <option value="ST">São Tomé and Príncipe</option>
-      <option value="SA">Saudi Arabia</option>
-      <option value="SN">Senegal</option>
-      <option value="RS">Serbia</option>
-      <option value="SC">Seychelles</option>
-      <option value="SL">Sierra Leone</option>
-      <option value="SG">Singapore</option>
-      <option value="SX">Sint Maarten</option>
-      <option value="SK">Slovakia</option>
-      <option value="SI">Slovenia</option>
-      <option value="SB">Solomon Islands</option>
-      <option value="SO">Somalia</option>
-      <option value="ZA">South Africa</option>
-      <option value="GS">South Georgia</option>
-      <option value="SS">South Sudan</option>
-      <option value="ES">Spain</option>
-      <option value="LK">Sri Lanka</option>
-      <option value="SR">Suriname</option>
-      <option value="SJ">Svalbard and Jan Mayen</option>
-      <option value="SE">Sweden</option>
-      <option value="CH">Switzerland</option>
-      <option value="TW">Taiwan</option>
-      <option value="TJ">Tajikistan</option>
-      <option value="TZ">Tanzania</option>
-      <option value="TH">Thailand</option>
-      <option value="TL">Timor-Leste</option>
-      <option value="TG">Togo</option>
-      <option value="TK">Tokelau</option>
-      <option value="TO">Tonga</option>
-      <option value="TT">Trinidad and Tobago</option>
-      <option value="TN">Tunisia</option>
-      <option value="TR">Turkey</option>
-      <option value="TM">Turkmenistan</option>
-      <option value="TC">Turks and Caicos Islands</option>
-      <option value="TV">Tuvalu</option>
-      <option value="UG">Uganda</option>
-      <option value="UA">Ukraine</option>
-      <option value="AE">United Arab Emirates</option>
-      <option value="GB">United Kingdom</option>
-      <option value="US">United States</option>
-      <option value="UY">Uruguay</option>
-      <option value="UZ">Uzbekistan</option>
-      <option value="VU">Vanuatu</option>
-      <option value="VE">Venezuela</option>
-      <option value="VN">Vietnam</option>
-      <option value="VG">Virgin Islands (British)</option>
-      <option value="WF">Wallis and Futuna</option>
-      <option value="EH">Western Sahara</option>
-      <option value="YE">Yemen</option>
-      <option value="ZM">Zambia</option>
+      <option value="WS">Samoa</option><option value="SM">San Marino</option>
+      <option value="ST">São Tomé and Príncipe</option><option value="SA">Saudi Arabia</option>
+      <option value="SN">Senegal</option><option value="RS">Serbia</option>
+      <option value="SC">Seychelles</option><option value="SL">Sierra Leone</option>
+      <option value="SG">Singapore</option><option value="SX">Sint Maarten</option>
+      <option value="SK">Slovakia</option><option value="SI">Slovenia</option>
+      <option value="SB">Solomon Islands</option><option value="SO">Somalia</option>
+      <option value="ZA">South Africa</option><option value="GS">South Georgia</option>
+      <option value="SS">South Sudan</option><option value="ES">Spain</option>
+      <option value="LK">Sri Lanka</option><option value="SR">Suriname</option>
+      <option value="SJ">Svalbard and Jan Mayen</option><option value="SE">Sweden</option>
+      <option value="CH">Switzerland</option><option value="TW">Taiwan</option>
+      <option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option>
+      <option value="TH">Thailand</option><option value="TL">Timor-Leste</option>
+      <option value="TG">Togo</option><option value="TK">Tokelau</option>
+      <option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option>
+      <option value="TN">Tunisia</option><option value="TR">Turkey</option>
+      <option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option>
+      <option value="TV">Tuvalu</option><option value="UG">Uganda</option>
+      <option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option>
+      <option value="GB">United Kingdom</option><option value="US">United States</option>
+      <option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option>
+      <option value="VU">Vanuatu</option><option value="VE">Venezuela</option>
+      <option value="VN">Vietnam</option><option value="VG">Virgin Islands (British)</option>
+      <option value="WF">Wallis and Futuna</option><option value="EH">Western Sahara</option>
+      <option value="YE">Yemen</option><option value="ZM">Zambia</option>
       <option value="ZW">Zimbabwe</option>
     </select>
 
@@ -607,8 +533,109 @@
     </select>
 
     <input type="submit" value="Send My Request" />
-
   </form>
+
+  <script>
+    // ══════════════════════════════════════════════════
+    //  DUPLICATE DETECTION — localStorage
+    //  Stocke email, téléphone, entreprise des soumissions
+    //  précédentes et bloque si doublon détecté
+    // ══════════════════════════════════════════════════
+
+    const STORAGE_KEY = 'solargroup_leads';
+
+    function getStoredLeads() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function normalize(val) {
+      return (val || '').trim().toLowerCase().replace(/\s+/g, '');
+    }
+
+    function checkDuplicate(email, phone, company) {
+      const leads = getStoredLeads();
+      const duplicateFields = [];
+
+      const nEmail   = normalize(email);
+      const nPhone   = normalize(phone);
+      const nCompany = normalize(company);
+
+      for (const lead of leads) {
+        if (nEmail   && lead.email   && normalize(lead.email)   === nEmail)   { if (!duplicateFields.includes('Email'))   duplicateFields.push('Email');   }
+        if (nPhone   && lead.phone   && normalize(lead.phone)   === nPhone)   { if (!duplicateFields.includes('Phone'))   duplicateFields.push('Phone');   }
+        if (nCompany && lead.company && normalize(lead.company) === nCompany) { if (!duplicateFields.includes('Company')) duplicateFields.push('Company'); }
+      }
+
+      return duplicateFields;
+    }
+
+    function saveLead(email, phone, company) {
+      const leads = getStoredLeads();
+      leads.push({
+        email:   (email   || '').trim(),
+        phone:   (phone   || '').trim(),
+        company: (company || '').trim(),
+        date:    new Date().toISOString()
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+    }
+
+    function showDuplicateAlert(fields) {
+      const alert  = document.getElementById('duplicateAlert');
+      const tags   = document.getElementById('alertFields');
+
+      // Construire les tags des champs en doublon
+      tags.innerHTML = fields.map(f =>
+        `<span class="alert-tag">⚠️ ${f} already exists</span>`
+      ).join('');
+
+      alert.classList.add('visible');
+      alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Mettre en surbrillance les champs concernés
+      document.getElementById('email').classList.remove('duplicate-field');
+      document.getElementById('phone').classList.remove('duplicate-field');
+      document.getElementById('company').classList.remove('duplicate-field');
+
+      if (fields.includes('Email'))   document.getElementById('email').classList.add('duplicate-field');
+      if (fields.includes('Phone'))   document.getElementById('phone').classList.add('duplicate-field');
+      if (fields.includes('Company')) document.getElementById('company').classList.add('duplicate-field');
+    }
+
+    function hideDuplicateAlert() {
+      document.getElementById('duplicateAlert').classList.remove('visible');
+      document.getElementById('email').classList.remove('duplicate-field');
+      document.getElementById('phone').classList.remove('duplicate-field');
+      document.getElementById('company').classList.remove('duplicate-field');
+    }
+
+    // Masquer l'alerte dès que l'utilisateur modifie un champ
+    ['email', 'phone', 'company'].forEach(id => {
+      document.getElementById(id).addEventListener('input', hideDuplicateAlert);
+    });
+
+    // Interception de la soumission
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+      const email   = document.getElementById('email').value;
+      const phone   = document.getElementById('phone').value;
+      const company = document.getElementById('company').value;
+
+      const duplicates = checkDuplicate(email, phone, company);
+
+      if (duplicates.length > 0) {
+        e.preventDefault();          // Bloquer l'envoi
+        showDuplicateAlert(duplicates);
+        return;
+      }
+
+      // Aucun doublon → sauvegarder et laisser le formulaire s'envoyer
+      saveLead(email, phone, company);
+    });
+  </script>
 
 </body>
 </html>
