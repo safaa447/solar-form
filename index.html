@@ -609,6 +609,80 @@
     <input type="submit" value="Send My Request" />
 
   </form>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
 
+  const form = document.getElementById("leadForm");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // ❌ يمنع الانتقال
+
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const company = document.getElementById("company").value.trim();
+
+    if (!email || !phone || !company) {
+      alert("⚠️ عبي جميع الحقول");
+      return;
+    }
+
+    try {
+
+      const exists = await checkLead(email, phone, company);
+
+      if (exists) {
+        alert("⚠️ هاد Lead (email / phone / company) كاين من قبل!");
+        return; // ❌ stop
+      }
+
+      alert("✔ OK ما كاين حتى duplicate");
+
+      form.submit(); // ✔ إرسال
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ مشكل فالاتصال بـ Salesforce");
+    }
+
+  });
+
+});
+
+
+// 🔵 Check Lead in Salesforce
+async function checkLead(email, phone, company) {
+
+  const token = localStorage.getItem("token");
+  const instance = localStorage.getItem("instance");
+
+  if (!token || !instance) {
+    alert("❌ خاص login ديال Salesforce");
+    return true;
+  }
+
+  // 🔥 نتحققو على email OR phone OR company
+  const query = `
+    SELECT Id 
+    FROM Lead 
+    WHERE Email='${email}' 
+    OR Phone='${phone}' 
+    OR Company='${company}' 
+    LIMIT 1
+  `;
+
+  const url = `${instance}/services/data/v60.0/query?q=${encodeURIComponent(query)}`;
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });
+
+  const data = await res.json();
+
+  return data.totalSize > 0; // true = موجود
+}
+</script>
 </body>
 </html>
