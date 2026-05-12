@@ -535,107 +535,39 @@
     <input type="submit" value="Send My Request" />
   </form>
 
-  <script>
-    // ══════════════════════════════════════════════════
-    //  DUPLICATE DETECTION — localStorage
-    //  Stocke email, téléphone, entreprise des soumissions
-    //  précédentes et bloque si doublon détecté
-    // ══════════════════════════════════════════════════
+ <script>
+document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-    const STORAGE_KEY = 'solargroup_leads';
+    const email   = document.getElementById('email').value;
+    const phone   = document.getElementById('phone').value;
+    const company = document.getElementById('company').value;
 
-    function getStoredLeads() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      } catch {
-        return [];
-      }
+    try {
+        let res = await fetch("check_lead.php", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ email, phone, company })
+        });
+
+        let data = await res.json();
+
+        if (data.exists) {
+            showDuplicateAlert(['Email / Phone / Company']);
+
+            alert("⚠️ Ces informations existent déjà dans notre système. Veuillez vérifier vos données.");
+            return;
+        }
+
+        // No duplicate → save to Salesforce
+        this.submit();
+
+    } catch (err) {
+        console.error(err);
+        alert("Erreur de vérification, veuillez réessayer.");
     }
-
-    function normalize(val) {
-      return (val || '').trim().toLowerCase().replace(/\s+/g, '');
-    }
-
-    function checkDuplicate(email, phone, company) {
-      const leads = getStoredLeads();
-      const duplicateFields = [];
-
-      const nEmail   = normalize(email);
-      const nPhone   = normalize(phone);
-      const nCompany = normalize(company);
-
-      for (const lead of leads) {
-        if (nEmail   && lead.email   && normalize(lead.email)   === nEmail)   { if (!duplicateFields.includes('Email'))   duplicateFields.push('Email');   }
-        if (nPhone   && lead.phone   && normalize(lead.phone)   === nPhone)   { if (!duplicateFields.includes('Phone'))   duplicateFields.push('Phone');   }
-        if (nCompany && lead.company && normalize(lead.company) === nCompany) { if (!duplicateFields.includes('Company')) duplicateFields.push('Company'); }
-      }
-
-      return duplicateFields;
-    }
-
-    function saveLead(email, phone, company) {
-      const leads = getStoredLeads();
-      leads.push({
-        email:   (email   || '').trim(),
-        phone:   (phone   || '').trim(),
-        company: (company || '').trim(),
-        date:    new Date().toISOString()
-      });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
-    }
-
-    function showDuplicateAlert(fields) {
-      const alert  = document.getElementById('duplicateAlert');
-      const tags   = document.getElementById('alertFields');
-
-      // Construire les tags des champs en doublon
-      tags.innerHTML = fields.map(f =>
-        `<span class="alert-tag">⚠️ ${f} already exists</span>`
-      ).join('');
-
-      alert.classList.add('visible');
-      alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Mettre en surbrillance les champs concernés
-      document.getElementById('email').classList.remove('duplicate-field');
-      document.getElementById('phone').classList.remove('duplicate-field');
-      document.getElementById('company').classList.remove('duplicate-field');
-
-      if (fields.includes('Email'))   document.getElementById('email').classList.add('duplicate-field');
-      if (fields.includes('Phone'))   document.getElementById('phone').classList.add('duplicate-field');
-      if (fields.includes('Company')) document.getElementById('company').classList.add('duplicate-field');
-    }
-
-    function hideDuplicateAlert() {
-      document.getElementById('duplicateAlert').classList.remove('visible');
-      document.getElementById('email').classList.remove('duplicate-field');
-      document.getElementById('phone').classList.remove('duplicate-field');
-      document.getElementById('company').classList.remove('duplicate-field');
-    }
-
-    // Masquer l'alerte dès que l'utilisateur modifie un champ
-    ['email', 'phone', 'company'].forEach(id => {
-      document.getElementById(id).addEventListener('input', hideDuplicateAlert);
-    });
-
-    // Interception de la soumission
-    document.getElementById('leadForm').addEventListener('submit', function(e) {
-      const email   = document.getElementById('email').value;
-      const phone   = document.getElementById('phone').value;
-      const company = document.getElementById('company').value;
-
-      const duplicates = checkDuplicate(email, phone, company);
-
-      if (duplicates.length > 0) {
-        e.preventDefault();          // Bloquer l'envoi
-        showDuplicateAlert(duplicates);
-        return;
-      }
-
-      // Aucun doublon → sauvegarder et laisser le formulaire s'envoyer
-      saveLead(email, phone, company);
-    });
-  </script>
+});
+</script>
 
 </body>
 </html>
